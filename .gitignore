@@ -1,0 +1,5 @@
+*.pyc
+jdb/settings.py
+jdb/wsgi.py
+*/migrations/*
+*/__pycache__/*
