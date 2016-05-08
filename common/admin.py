@@ -4,7 +4,7 @@ from common.models import Category, CategoryForm
 
 class CategoryAdmin(admin.ModelAdmin):
     form = CategoryForm
-    list_display = ('name', 'description',)
-    search_fields = ('name', 'description',)
+    list_display = ('name', 'note',)
+    search_fields = ('name', 'note',)
 
 admin.site.register(Category, CategoryAdmin)

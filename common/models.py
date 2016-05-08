@@ -4,15 +4,18 @@ from django.forms import ModelForm, CharField as formCharField, Textarea
 
 class Category(Model):
     name = CharField(max_length=32, primary_key=True)
-    description = CharField(max_length=256)
+    note = CharField(max_length=256)
 
     class Meta:
         verbose_name_plural = 'categories'
 
+    def __unicode__(self):
+        return "'{}' category".format(self.name)
+
 
 class CategoryForm(ModelForm):
-    description = formCharField(required=False, widget=Textarea)
+    note = formCharField(required=False, widget=Textarea)
 
     class Meta:
         model = Category
-        fields = ('name', 'description',)
+        fields = ('name', 'note',)
