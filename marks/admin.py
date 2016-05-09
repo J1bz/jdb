@@ -1,5 +1,5 @@
 from django.contrib import admin
-from bookmarks.models import (
+from marks.models import (
     Bookmark, BookmarkForm, Book, BookForm, ReadLater, ReadLaterForm,
     News, NewsForm, People, PeopleForm)
 
