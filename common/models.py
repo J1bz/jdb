@@ -9,7 +9,7 @@ class Category(Model):
     class Meta:
         verbose_name_plural = 'categories'
 
-    def __unicode__(self):
+    def __str__(self):
         return "'{}' category".format(self.name)
 
 
