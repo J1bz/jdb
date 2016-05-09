@@ -10,7 +10,7 @@ class Category(Model):
         verbose_name_plural = 'categories'
 
     def __str__(self):
-        return "'{}' category".format(self.name)
+        return self.name
 
 
 class CategoryForm(ModelForm):
