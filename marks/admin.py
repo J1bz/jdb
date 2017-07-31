@@ -1,12 +1,20 @@
 from django.contrib import admin
+from django.utils.html import format_html
 from marks.models import (
     Bookmark, BookmarkForm, Book, BookForm, ReadLater, ReadLaterForm,
     News, NewsForm, People, PeopleForm)
 
 
-class BookmarkAdmin(admin.ModelAdmin):
+class HyperlinkedNameMixin():
+    def hyperlinked_name(self, obj):
+        return format_html("<a href='{0}'>{0}</a>".format(obj))
+
+    hyperlinked_name.allow_tags = True
+
+
+class BookmarkAdmin(HyperlinkedNameMixin, admin.ModelAdmin):
     form = BookmarkForm
-    list_display = ('category', 'name', 'note',)
+    list_display = ('category', 'hyperlinked_name', 'note',)
     search_fields = ('category__name', 'name', 'note',)
 
 
@@ -16,15 +24,15 @@ class BookAdmin(admin.ModelAdmin):
     search_fields = ('category__name', 'title', 'author', 'note',)
 
 
-class ReadLaterAdmin(admin.ModelAdmin):
+class ReadLaterAdmin(HyperlinkedNameMixin, admin.ModelAdmin):
     form = ReadLaterForm
-    list_display = ('category', 'name', 'note',)
+    list_display = ('category', 'hyperlinked_name', 'note',)
     search_fields = ('category__name', 'name', 'note',)
 
 
-class NewsAdmin(admin.ModelAdmin):
+class NewsAdmin(HyperlinkedNameMixin, admin.ModelAdmin):
     form = NewsForm
-    list_display = ('category', 'name', 'rss', 'note',)
+    list_display = ('category', 'hyperlinked_name', 'rss', 'note',)
     search_fields = ('category__name', 'name', 'note',)
 
 

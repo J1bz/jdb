@@ -1,13 +1,17 @@
 from django.db.models import Model, CharField, ForeignKey, BooleanField
+from django.db.models import CASCADE
 from django.forms import ModelForm, CharField as formCharField, Textarea
 
 from common.models import Category
 
 
 class Bookmark(Model):
-    category = ForeignKey(Category)
+    category = ForeignKey(Category, on_delete=CASCADE)
     name = CharField(max_length=256, primary_key=True)
     note = CharField(max_length=256)
+
+    def __str__(self):
+        return self.name
 
 
 class BookmarkForm(ModelForm):
@@ -19,7 +23,7 @@ class BookmarkForm(ModelForm):
 
 
 class Book(Model):
-    category = ForeignKey(Category)
+    category = ForeignKey(Category, on_delete=CASCADE)
     title = CharField(max_length=64, primary_key=True)
     author = CharField(max_length=64)
     note = CharField(max_length=256)
@@ -35,12 +39,15 @@ class BookForm(ModelForm):
 
 
 class ReadLater(Model):
-    category = ForeignKey(Category)
+    category = ForeignKey(Category, on_delete=CASCADE)
     name = CharField(max_length=256)
     note = CharField(max_length=256)
 
     class Meta:
         verbose_name_plural = 'reads later'
+
+    def __str__(self):
+        return self.name
 
 
 class ReadLaterForm(ModelForm):
@@ -52,13 +59,16 @@ class ReadLaterForm(ModelForm):
 
 
 class News(Model):
-    category = ForeignKey(Category)
+    category = ForeignKey(Category, on_delete=CASCADE)
     name = CharField(max_length=256)
     rss = CharField(max_length=256, null=True)
     note = CharField(max_length=256)
 
     class Meta:
         verbose_name_plural = 'news'
+
+    def __str__(self):
+        return self.name
 
 
 class NewsForm(ModelForm):
@@ -72,7 +82,7 @@ class NewsForm(ModelForm):
 
 class People(Model):
     """Interesting people *.*"""
-    category = ForeignKey(Category)
+    category = ForeignKey(Category, on_delete=CASCADE)
     name = CharField(max_length=256, primary_key=True)
     note = CharField(max_length=256)
 
